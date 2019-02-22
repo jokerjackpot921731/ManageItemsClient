@@ -18,15 +18,17 @@ export class HomePageComponent implements OnInit {
 
   init() {
     this.loadForm = this.fb.group({
-      CodeOder: ['', Validators.required]
+      CodeOrder: ['', Validators.required]
     });
   }
 
   loadTable() {
-    const CodeOrder = this.loadForm.value
-    this.authService.loadFunct(CodeOrder).subscribe(data=>{
+    const { CodeOrder } = this.loadForm.value
+    const body = { CodeOrder }
+    console.log(body)
+    this.authService.loadFunct(body).subscribe(data=>{
       if (data.success) {
-        this.router.navigate(['home'])
+        this.router.navigate([''])
       }
     })
   }
