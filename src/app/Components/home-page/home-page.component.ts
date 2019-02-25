@@ -33,10 +33,13 @@ export class HomePageComponent implements OnInit {
     this.authService.loadFunct(body).subscribe(data=>{
       if (data.success) {
         this.result = data.result
-        console.log(this.result)
         this.router.navigate([''])
       }
+      else {
+        console.log(data)
+      }
     })
+    this.loadTable()
   }
 
   loadTable() {

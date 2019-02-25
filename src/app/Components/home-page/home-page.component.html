@@ -1,29 +1,45 @@
 <form [formGroup]="loadForm" (ngSubmit)="getCode()">
   <div class="container">
     <label for="code"><b>CODE NUMBER: </b></label>
-    <input type="text" placeholder="Enter code" name="code" formControlName="CodeOrder" required><br>
+    <input type="text" placeholder="Enter code" name="code" formControlName="CodeOrder" required>
+    <label for="code"><b>ID: </b></label>
+    <input type="text" placeholder="Enter ID" name="code" formControlName="stt" required><br>
     <button type="submit" id="btnCheck">Auto Check</button>
   </div>
 </form>
-<div *ngIf="tableDatas.length>0" >
+<div *ngIf="tableDatas.length>0">
   <table style="width:100%" id="table">
     <tr>
       <th>ID</th>
+      <th>Link Product</th>
+      <th>Note</th>
+      <th>Address</th>
       <th>Tracking Number</th>
       <th>Status Package</th> 
       <th>Time Delivery</th>
-    </tr>
+      <th>Cost</th>
+    </tr>     
     <tr *ngFor = "let tableData of tableDatas">
       <td>{{tableData.ID}}</td>
+      <!-- <th><input type="text" name="link" style="border: none" size="40"></th> -->
+      <th>Link Product Example</th>
+      <th>Note Example</th>
+      <th>Address Example</th>
       <td>{{tableData.trackNum}}</td>
       <td>{{tableData.staPack}}</td>
-      <td>{{tableData.tiemDeli}}</td>
-    </tr>  
+      <td>{{tableData.timeDeli}}</td>
+      <th>Cost Example</th>        
+    </tr>      
     <tr *ngIf="result">
       <td>{{result.ID}}</td>
+      <th>Link Product Example</th>
+      <th>Note Example</th>
+      <th>Address Example</th>
       <td>{{result.trackNum}}</td>
-      <td>{{resultv.staPack}}</td>
-      <td>{{result.tiemDeli}}</td>
-    </tr>  
-  </table>
+      <td>{{result.staPack}}</td>
+      <td>{{result.timeDeli}}</td>
+      <th>Cost Example</th>
+    </tr>      
+    </table>
 </div>
+
