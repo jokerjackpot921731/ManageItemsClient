@@ -2,12 +2,19 @@
   <div class="container">
     <label for="code"><b>CODE NUMBER: </b></label>
     <input type="text" placeholder="Enter code" name="code" formControlName="CodeOrder" required>
-    <label for="code"><b>ID: </b></label>
-    <input type="text" placeholder="Enter ID" name="code" formControlName="stt" required><br>
+    <label for="stt"><b>  ID: </b></label>
+    <input type="text" placeholder="Enter ID" name="stt" formControlName="Stt" required><br>
     <button type="submit" id="btnCheck">Auto Check</button>
   </div>
 </form>
-<div *ngIf="tableDatas.length>0">
+<!-- <form [formGroup]="loadForm" (ngSubmit)="getCode()">
+  <div class="container">
+    <label for="stt"><b>ID: </b></label>
+    <input type="text" placeholder="Enter ID" name="stt" formControlName="Stt" required><br>
+    <button type="submit" id="btnCheck">Auto Check</button>
+  </div>
+</form> -->
+<div *ngIf="tableDatas.length>=0">
   <table style="width:100%" id="table">
     <tr>
       <th>ID</th>
