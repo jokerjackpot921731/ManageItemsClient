@@ -28,20 +28,19 @@ export class HomePageComponent implements OnInit {
   }
 
   getCode() {
-    const { CodeOrder } = this.loadForm.value
+    const { CodeOrder, Stt } = this.loadForm.value
     console.log(this.loadForm)
-    const body = { CodeOrder }
+    const body = { CodeOrder, Stt }
     console.log(body)
     this.authService.loadFunct(body).subscribe(data=>{
       if (data.success) {
-        this.result = data.result
-        // this.router.navigate([''])
+        console.log(data.result)
+        this.loadTable()
       }
       else {
-        console.log(data)
+        console.log("error get code")
       }
     })
-    this.loadTable()
   }
 
   loadTable() {
