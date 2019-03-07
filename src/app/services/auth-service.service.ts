@@ -17,4 +17,16 @@ export class AuthServiceService {
     return this.http.get(`http://localhost:3000/get-table`)
   }
 
+  saveFunct(body): Observable<any> {
+    return this.http.post(`http://localhost:3000/input-item`,body)
+  }
+
+  updateFunct(): Observable<any> {
+    return this.http.get(`http://localhost:3000/update-status`)
+  }
+
+  updateAColumn(body): Observable<any> {
+    return this.http.post(`http://localhost:3000/update-column`,body)
+  }
+
 }

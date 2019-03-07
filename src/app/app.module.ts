@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './Components/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthServiceService } from './services/auth-service.service';
+import { InputItemComponent } from './Components/input-item/input-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent
+    HomePageComponent,
+    InputItemComponent
   ],
   imports: [
     HttpClientModule,

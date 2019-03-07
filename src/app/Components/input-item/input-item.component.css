@@ -1,16 +1,4 @@
-.red{
-  background-color: red
-}
-
-.orange{
-  background-color: orange
-}
-
-.green{
-  background-color: green
-}
 #table, th, td {
-  margin-top: 10px;
   border: 1px solid black;
   border-collapse: collapse;
 }
@@ -20,24 +8,18 @@ th, td {
 th {
   text-align: left;
 }
-/* #header {
+#header {
   margin: auto;
-  width: 50%;
+  width: 40%;
+  padding-top: 10px;
 }
-
-#btnCheck {
+#btnSave {
   margin-top: 20px;
   padding: 5px;
 }
 #title {
   padding-top: 10px;
   text-align: center;
-}
-#input {
-  float: left;
-}
-#belongInput {
-  float: right;
 }
 #body {
   padding-top: 150px;
@@ -52,27 +34,15 @@ th {
   padding-right: 10px;
 }
 #right {
+  width: 80%;
   float: right;
   display: flex;
   flex-direction: column;
 }
+
 #down-left {
   margin-top: 12px;
 }
 #down-right {
   margin-top: 8px;
 }
-#editOne {
-  margin-top: 5px;
-}
-#dropbox {
-  margin-top: 12px;
-  margin-left: 5px;
-}
-#code {
-  padding: 2px;
-}
-#btnSave {
-  margin-bottom: 20px;
-  padding: 5px;
-} */

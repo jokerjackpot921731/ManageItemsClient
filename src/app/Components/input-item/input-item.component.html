@@ -1,0 +1,65 @@
+<div class="content">
+  <!-- header -->
+  <div class="header" id="header">
+    <h1 id="title">INPUT ITEMS</h1>
+    <div id="control">
+      <div id="belongInput">
+        <form [formGroup]="saveForm" (ngSubmit)="saveItem()">
+          <div class="rawInput" id="rawInput">
+            <div id="left">
+              <label for="code" ><b>Link Product: </b></label>
+              <label for="stt" id="down-note"><b>Note: </b></label>      
+              <label for="stt" id="down-address"><b>Address: </b></label>              
+              <label for="stt" id="down-paid"><b>Paid: </b></label>              
+              <label for="stt" id="down-cost"><b>Cost Site: </b></label>              
+              <label for="stt" id="down-order"><b>Order By: </b></label>                      
+            </div>
+            <div id="right">
+                <input type="text" placeholder="Enter link product" formControlName="linkProduct" required>
+                <input type="text" placeholder="Enter note" formControlName="note" required id="down-note">
+                <input type="text" placeholder="Enter address" formControlName="address" required id="down-address">
+                <input type="text" placeholder="Enter paid" formControlName="paid" required id="down-paid">
+                <input type="text" placeholder="Enter cost site" formControlName="costSite" required id="down-cost">
+                <input type="text" placeholder="Enter order by" formControlName="orderBy" required id="down-order"><br>
+            </div>                    
+          </div>    
+          <button type="submit" id="btnSave">Save Item</button>     
+        </form>
+      </div>
+      <button type="submit" id="btnSave" (click)="backHome()">Way Back Home</button>
+    </div>
+  </div>
+  <!-- body -->
+  <div id="body">
+    <div *ngIf="tableDatas.length >= 0">
+      <table style="width:100%" id="table">
+        <tr>
+          <th>ID</th>
+          <th>Link Product</th>
+          <th>Note</th>
+          <th>Address</th>
+          <th>Tracking Number</th>
+          <th>Status Package</th> 
+          <th>Time Delivery</th>
+          <th>Cost Site</th>
+          <th>Paid</th>
+          <th>Order By</th>
+        </tr>     
+        <tr *ngFor = "let tableData of tableDatas">
+          <td>{{tableData.ID}}</td>
+          <!-- <th><input type="text" name="link" style="border: none" size="40"></th> -->
+          <th>{{tableData.linkProduct}}</th>
+          <th>{{tableData.note}}</th>
+          <th>{{tableData.address}}</th>
+          <td>{{tableData.trackNum}}</td>
+          <td>{{tableData.staPack}}</td>
+          <td>{{tableData.timeDeli}}</td>
+          <th>{{tableData.costSite}}</th>
+          <th>{{tableData.paid}}</th>
+          <th>{{tableData.orderBy}}</th>        
+        </tr>         
+      </table>
+    </div>
+  </div>
+</div>
+

@@ -1,42 +1,196 @@
-<form [formGroup]="loadForm" (ngSubmit)="getCode()">
-  <div class="container">
-    <label for="code"><b>CODE NUMBER: </b></label>
-    <input type="text" placeholder="Enter code" name="code" formControlName="CodeOrder" required>
-    <label for="stt"><b>  ID: </b></label>
-    <input type="text" placeholder="Enter ID" name="stt" formControlName="Stt" required><br>
-    <button type="submit" id="btnCheck">Auto Check</button>
-  </div>
-</form>
-<!-- <form [formGroup]="loadForm" (ngSubmit)="getCode()">
-  <div class="container">
-    <label for="stt"><b>ID: </b></label>
-    <input type="text" placeholder="Enter ID" name="stt" formControlName="Stt" required><br>
-    <button type="submit" id="btnCheck">Auto Check</button>
-  </div>
-</form> -->
-<div *ngIf="tableDatas.length>=0">
-  <table style="width:100%" id="table">
-    <tr>
-      <th>ID</th>
-      <th>Link Product</th>
-      <th>Note</th>
-      <th>Address</th>
-      <th>Tracking Number</th>
-      <th>Status Package</th> 
-      <th>Time Delivery</th>
-      <th>Cost</th>
-    </tr>     
-    <tr *ngFor = "let tableData of tableDatas">
-      <td>{{tableData.ID}}</td>
-      <!-- <th><input type="text" name="link" style="border: none" size="40"></th> -->
-      <th>Link Product Example</th>
-      <th>Note Example</th>
-      <th>Address Example</th>
-      <td>{{tableData.trackNum}}</td>
-      <td>{{tableData.staPack}}</td>
-      <td>{{tableData.timeDeli}}</td>
-      <th>Cost Example</th>        
-    </tr>          
-    </table>
-</div>
+<div class="content">
+  <!-- header -->
+  <div class="header" id="header">
+    <h1 id="title">TRACKING NUMBER</h1>
+    <div id="control">
+      <div id="input">
+        <label class="radio">
+          <input type="radio" (change)="inputData()" name="answer" id="inputRows">
+          Input items
+        </label><br>
+        <!-- <label class="radio">
+          <input type="radio" (change)="showSelect()" name="answer" id="editOne">
+          Edit one column
+        </label><br> -->
+        <select *ngIf="show" id="dropbox" [(ngModel)]="select" (change)="showFormTracking()">
+          <option value="0">Choose column</option>
+          <option value="1">Link Product</option>
+          <option value="2">Note</option>
+          <option value="3">Address</option>
+          <option value="4">Tracking Number</option>
+          <option value="5">Paid</option>
+          <option value="6">Cost Site</option>
+          <option value="7">Order By</option>
+        </select>
+      </div>
 
+      <div *ngIf="openLink" id="belongInput">
+        <form [formGroup]="setLink" (ngSubmit)="editLink()">
+          <div>
+            <div id="left">
+              <label for="code"><b>Link Product: </b></label>
+              <label for="stt" id="down-left"><b> ID: </b></label>
+            </div>
+            <div id="right">
+              <input type="text" placeholder="Enter link product" name="code" formControlName="linkProduct" required>
+              <input type="text" placeholder="Enter ID" name="stt" formControlName="Stt" required id="down-right">
+            </div>
+          </div>
+          <button type="submit" id="btnCheck">Save</button>
+        </form>
+      </div>
+
+      <div *ngIf="openNote" id="belongInput">
+        <form [formGroup]="setNote" (ngSubmit)="editNote()">
+          <div>
+            <div id="left">
+              <label for="code"><b>Note: </b></label>
+              <label for="stt" id="down-left"><b> ID: </b></label>
+            </div>
+            <div id="right">
+              <input type="text" placeholder="Enter Note" name="code" formControlName="note" required>
+              <input type="text" placeholder="Enter ID" name="stt" formControlName="Stt" required id="down-right">
+            </div>
+          </div>
+          <button type="submit" id="btnCheck">Save</button>
+        </form>
+      </div>
+
+      <div *ngIf="openAddress" id="belongInput">
+        <form [formGroup]="setAddress" (ngSubmit)="editAddress()">
+          <div>
+            <div id="left">
+              <label for="code"><b>Address: </b></label>
+              <label for="stt" id="down-left"><b> ID: </b></label>
+            </div>
+            <div id="right">
+              <input type="text" placeholder="Enter Address" name="code" formControlName="address" required>
+              <input type="text" placeholder="Enter ID" name="stt" formControlName="Stt" required id="down-right">
+            </div>
+          </div>
+          <button type="submit" id="btnCheck">Save</button>
+        </form>
+      </div>
+
+      <div *ngIf="openTracking" id="belongInput">
+        <form [formGroup]="loadForm" (ngSubmit)="getCode()">
+          <div class="trackNum" id="trackNum">
+            <div id="left">
+              <label for="code"><b>CODE NUMBER: </b></label>
+              <label for="stt" id="down-left"><b> ID: </b></label>
+            </div>
+            <div id="right">
+              <input type="text" placeholder="Enter code" name="code" formControlName="CodeOrder" required>
+              <input type="text" placeholder="Enter ID" name="stt" formControlName="Stt" required id="down-right">
+            </div>
+          </div>
+          <button type="submit" id="btnCheck">Auto Check</button>
+        </form>
+      </div>
+
+      <div *ngIf="openCost" id="belongInput">
+        <form [formGroup]="setCost" (ngSubmit)="editCost()">
+          <div>
+            <div id="left">
+              <label for="code"><b>Cost: </b></label>
+              <label for="stt" id="down-left"><b> ID: </b></label>
+            </div>
+            <div id="right">
+              <input type="text" placeholder="Enter Cost" name="code" formControlName="cost" required>
+              <input type="text" placeholder="Enter ID" name="stt" formControlName="Stt" required id="down-right">
+            </div>
+          </div>
+          <button type="submit" id="btnCheck" (click)="editCost()">Save</button>
+        </form>
+      </div>
+
+      <div *ngIf="openPaid" id="belongInput">
+        <form [formGroup]="setPaid" (ngSubmit)="editPaid()">
+          <div>
+            <div id="left">
+              <label for="code"><b>Paid: </b></label>
+              <label for="stt" id="down-left"><b> ID: </b></label>
+            </div>
+            <div id="right">
+              <input type="text" placeholder="Enter Paid" name="code" formControlName="paid" required>
+              <input type="text" placeholder="Enter ID" name="stt" formControlName="Stt" required id="down-right">
+            </div>
+          </div>
+          <button type="submit" id="btnCheck">Save</button>
+        </form>
+      </div>
+
+      <div *ngIf="openOrder" id="belongInput">
+        <form [formGroup]="setOrder" (ngSubmit)="editOrder()">
+          <div>
+            <div id="left">
+              <label for="code"><b>Order: </b></label>
+              <label for="stt" id="down-left"><b> ID: </b></label>
+            </div>
+            <div id="right">
+              <input type="text" placeholder="Enter Order" name="code" formControlName="orderBy" required>
+              <input type="text" placeholder="Enter ID" name="stt" formControlName="Stt" required id="down-right">
+            </div>
+          </div>
+          <button type="submit" id="btnCheck">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- body -->
+  <div id="body">
+    <div *ngIf="tableDatas.length >= 0">
+      <table id="table">
+        <tr>
+          <td style="min-width:30px"><b>ID</b></td>
+          <td style="min-width:700px"><b>Link Product</b></td>
+          <td style="min-width:100px"><b>Note</b></td>
+          <td style="min-width:500px"><b>Address</b></td>
+          <td style="min-width:200px"><b>Tracking Number</b></td>
+          <td style="min-width:200px"><b>Status Package</b></td>
+          <td style="min-width:200px"><b>Time Delivery</b></td>
+          <td style="min-width:100px"><b>Cost Site</b></td>
+          <td style="min-width:100px"><b>Paid</b></td>
+          <td style="min-width:100px"><b>Order By</b></td>
+        </tr>
+        <tr *ngFor="let tableData of tableDatas">
+          <td><b>{{tableData.ID}}</b></td>
+          <td>
+            <a *ngIf="!tableData.openLink" (click)="showInputLink(tableData.ID)"><a href="{{tableData.linkProduct}}">{{tableData.linkProduct}}</a></a>
+            <input *ngIf="showLink && tableData.openLink" type="text" style="min-width:690px" [(ngModel)]="tableData.linkProduct" (keydown)="onKeydown($event, tableData.linkProduct, tableData.ID, 1)">          
+          </td>
+          <td>
+              <a *ngIf="!tableData.openNote" (click)="showInputNote(tableData.ID)" [innerHTML]="linesNote(tableData.note)">{{tableData.note}}</a>
+              <input *ngIf="showNote && tableData.openNote" type="text" style="min-width:90px" [(ngModel)]="tableData.note" (keydown)="onKeydown($event, tableData.note, tableData.ID, 2)">  
+          </td>
+          <td>
+              <a *ngIf="!tableData.openAddress" (click)="showInputAddress(tableData.ID)" [innerHTML]="linesAddress(tableData.address)"></a>
+              <input *ngIf="showAddress && tableData.openAddress" type="text" style="min-width:490px" [(ngModel)]="tableData.address" (keydown)="onKeydown($event, tableData.address, tableData.ID, 3)">
+          </td>
+          <td>
+              <a *ngIf="!tableData.openTrack" (click)="showInputTrack(tableData.ID)" [innerHTML]="linesTrackNum(tableData.trackNum)"></a>
+              <input *ngIf="showTrack && tableData.openTrack" type="text" style="min-width:200px" [(ngModel)]="tableData.trackNum" (keydown)="onKeydown($event, tableData.trackNum, tableData.ID, 7)">
+          </td>
+          <td attr.class="{{checkData(tableData.staPack).color}}">
+            {{checkData(tableData.staPack).text}}
+          </td>
+          <td [innerHTML]="linesTimeDeli(tableData.timeDeli)">
+          </td>
+          <td>
+              <a *ngIf="!tableData.openCost" (click)="showInputCost(tableData.ID)">{{tableData.costSite}}</a>
+              <input *ngIf="showCost && tableData.openCost" type="text" style="min-width:90px" [(ngModel)]="tableData.costSite" (keydown)="onKeydown($event, tableData.costSite, tableData.ID, 5)">
+          </td>
+          <td>
+              <a *ngIf="!tableData.openPaid" (click)="showInputPaid(tableData.ID)">{{tableData.paid}}</a>
+              <input *ngIf="showPaid && tableData.openPaid" type="text" style="min-width:90px" [(ngModel)]="tableData.paid" (keydown)="onKeydown($event, tableData.paid, tableData.ID, 4)">
+          </td>
+          <td>
+            <a *ngIf="!tableData.openOrder" (click)="showInputOrder(tableData.ID)">{{tableData.orderBy}}</a>
+              <input *ngIf="showOrder && tableData.openOrder" type="text" style="min-width:90px" [(ngModel)]="tableData.orderBy" (keydown)="onKeydown($event, tableData.orderBy, tableData.ID, 6)">
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
