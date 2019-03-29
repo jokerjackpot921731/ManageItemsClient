@@ -10,16 +10,46 @@
   background-color: green
 }
 #table, th, td {
-  margin-top: 10px;
+  width: 100%;
+  margin-top: 30px;
   border: 1px solid black;
   border-collapse: collapse;
 }
 th, td {
-  padding: 15px;
+  padding: 10px;
+  font-size: 10;
+  font-family: Arial;
 }
-th {
-  text-align: left;
+#stRow {
+  background-color: lightseagreen;
 }
+.form-control {
+  box-shadow: 0 10px 40px 0 #B0C1D9;
+  min-width: 500px;
+  min-height: 25px;
+  border: 2px solid #B0C1D9;
+  margin:auto;
+  width: 50%;
+}
+.form-control::placeholder  {
+  font-family: FontAwesome;
+}
+#right{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#inbody{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#pageChange{
+  text-align: center;
+}
+
 /* #header {
   margin: auto;
   width: 50%;

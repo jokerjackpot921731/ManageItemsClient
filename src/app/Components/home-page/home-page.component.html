@@ -1,17 +1,21 @@
 <div class="content">
   <!-- header -->
   <div class="header" id="header">
-    <h1 id="title">TRACKING NUMBER</h1>
-    <div id="control">
+    <div id="right">
+      <h1 style="text-align: center">TRACKING NUMBER</h1>
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Start searching for a product by id, link product,...">
+    </div>
+    
+    <!-- <div id="control">
       <div id="input">
         <label class="radio">
           <input type="radio" (change)="inputData()" name="answer" id="inputRows">
           Input items
         </label><br>
-        <!-- <label class="radio">
+        <label class="radio">
           <input type="radio" (change)="showSelect()" name="answer" id="editOne">
           Edit one column
-        </label><br> -->
+        </label><br>
         <select *ngIf="show" id="dropbox" [(ngModel)]="select" (change)="showFormTracking()">
           <option value="0">Choose column</option>
           <option value="1">Link Product</option>
@@ -135,32 +139,32 @@
           <button type="submit" id="btnCheck">Save</button>
         </form>
       </div>
-    </div>
-  </div>
+    </div> -->
+  </div> 
 
   <!-- body -->
   <div id="body">
-    <div *ngIf="tableDatas.length >= 0">
+    <div *ngIf="tableDatas.length >= 0" id="inbody">
       <table id="table">
-        <tr>
-          <td style="min-width:30px"><b>ID</b></td>
-          <td style="min-width:700px"><b>Link Product</b></td>
-          <td style="min-width:100px"><b>Note</b></td>
-          <td style="min-width:500px"><b>Address</b></td>
-          <td style="min-width:200px"><b>Tracking Number</b></td>
-          <td style="min-width:200px"><b>Status Package</b></td>
-          <td style="min-width:200px"><b>Time Delivery</b></td>
-          <td style="min-width:100px"><b>Cost Site</b></td>
-          <td style="min-width:100px"><b>Paid</b></td>
-          <td style="min-width:100px"><b>Order By</b></td>
+        <tr id="stRow">
+          <td style="text-align: center"><b>ID</b></td>
+          <td><b>Link Product</b></td>
+          <td style="text-align: center"><b>Note</b></td>
+          <td style="min-width:220px"><b>Address</b></td>
+          <td style="min-width:160px"><b>Tracking Number</b></td>
+          <td style="min-width:150px"><b>Status Package</b></td>
+          <td style="min-width:140px"><b>Time Delivery</b></td>
+          <td style="text-align: center"><b>Cost Site</b></td>
+          <td style="text-align: center"><b>Paid</b></td>
+          <td style="text-align: center"><b>Order By</b></td>
         </tr>
-        <tr *ngFor="let tableData of tableDatas">
-          <td><b>{{tableData.ID}}</b></td>
+        <tr *ngFor="let tableData of tableDatas | filter:searchText | paginate: { itemsPerPage: 1000, currentPage: p }" id="inCenter">
+          <td style="text-align: center"><b>{{tableData.ID}}</b></td>
           <td>
             <a *ngIf="!tableData.openLink" (click)="showInputLink(tableData.ID)"><a href="{{tableData.linkProduct}}">{{tableData.linkProduct}}</a></a>
             <input *ngIf="showLink && tableData.openLink" type="text" style="min-width:690px" [(ngModel)]="tableData.linkProduct" (keydown)="onKeydown($event, tableData.linkProduct, tableData.ID, 1)">          
           </td>
-          <td>
+          <td style="text-align: center">
               <a *ngIf="!tableData.openNote" (click)="showInputNote(tableData.ID)" [innerHTML]="linesNote(tableData.note)">{{tableData.note}}</a>
               <input *ngIf="showNote && tableData.openNote" type="text" style="min-width:90px" [(ngModel)]="tableData.note" (keydown)="onKeydown($event, tableData.note, tableData.ID, 2)">  
           </td>
@@ -168,29 +172,30 @@
               <a *ngIf="!tableData.openAddress" (click)="showInputAddress(tableData.ID)" [innerHTML]="linesAddress(tableData.address)"></a>
               <input *ngIf="showAddress && tableData.openAddress" type="text" style="min-width:490px" [(ngModel)]="tableData.address" (keydown)="onKeydown($event, tableData.address, tableData.ID, 3)">
           </td>
-          <td>
+          <td style="text-align: center">
               <a *ngIf="!tableData.openTrack" (click)="showInputTrack(tableData.ID)" [innerHTML]="linesTrackNum(tableData.trackNum)"></a>
               <input *ngIf="showTrack && tableData.openTrack" type="text" style="min-width:200px" [(ngModel)]="tableData.trackNum" (keydown)="onKeydown($event, tableData.trackNum, tableData.ID, 7)">
           </td>
-          <td attr.class="{{checkData(tableData.staPack).color}}">
+          <td attr.class="{{checkData(tableData.staPack).color}}" style="text-align: center">
             {{checkData(tableData.staPack).text}}
           </td>
-          <td [innerHTML]="linesTimeDeli(tableData.timeDeli)">
+          <td [innerHTML]="linesTimeDeli(tableData.timeDeli)" style="text-align: center">
           </td>
-          <td>
+          <td style="text-align: center">
               <a *ngIf="!tableData.openCost" (click)="showInputCost(tableData.ID)">{{tableData.costSite}}</a>
               <input *ngIf="showCost && tableData.openCost" type="text" style="min-width:90px" [(ngModel)]="tableData.costSite" (keydown)="onKeydown($event, tableData.costSite, tableData.ID, 5)">
           </td>
-          <td>
+          <td style="text-align: center">
               <a *ngIf="!tableData.openPaid" (click)="showInputPaid(tableData.ID)">{{tableData.paid}}</a>
               <input *ngIf="showPaid && tableData.openPaid" type="text" style="min-width:90px" [(ngModel)]="tableData.paid" (keydown)="onKeydown($event, tableData.paid, tableData.ID, 4)">
           </td>
-          <td>
+          <td style="text-align: center">
             <a *ngIf="!tableData.openOrder" (click)="showInputOrder(tableData.ID)">{{tableData.orderBy}}</a>
               <input *ngIf="showOrder && tableData.openOrder" type="text" style="min-width:90px" [(ngModel)]="tableData.orderBy" (keydown)="onKeydown($event, tableData.orderBy, tableData.ID, 6)">
           </td>
         </tr>
       </table>
+      <pagination-controls (pageChange)="p = $event" style="text-align: center"></pagination-controls>
     </div>
   </div>
 </div>

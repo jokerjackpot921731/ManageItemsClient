@@ -7,6 +7,8 @@ import { HomePageComponent } from './Components/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthServiceService } from './services/auth-service.service';
 import { InputItemComponent } from './Components/input-item/input-item.component';
+import { NgxPaginationModule } from 'ngx-pagination'
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { InputItemComponent } from './Components/input-item/input-item.component
     InputItemComponent
   ],
   imports: [
+    Ng2SearchPipeModule,
+    NgxPaginationModule,
     HttpClientModule,
     BrowserModule,
     FormsModule,

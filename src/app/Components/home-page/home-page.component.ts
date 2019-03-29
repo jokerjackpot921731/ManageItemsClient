@@ -40,6 +40,7 @@ export class HomePageComponent implements OnInit {
   showPaid: boolean = false
   showOrder: boolean = false
   showTrack: boolean = false
+  searchText: any;
 
   constructor(private fb: FormBuilder, private authService: AuthServiceService, private router: Router) { }
 
@@ -193,13 +194,14 @@ export class HomePageComponent implements OnInit {
       const body = { params, Stt , noneColumn }
       console.log(body)
       this.authService.updateAColumn(body).subscribe(data => {
+        console.log(data)
         if (data.success) {
           console.log(data.result)
           this.loadTable()
           alert("Update finish!")
         }
         else {
-          alert("Update failed")
+          alert("Cannot automatically tracking, check code by yourself!")
         }
       })
     }
@@ -456,7 +458,6 @@ export class HomePageComponent implements OnInit {
           return res
         })
         this.tableDatas = item
-        // this.arrTimeDeli = this.tableDatas[0].timeDeli.split(",")
         console.log(this.tableDatas)
       }
     })
